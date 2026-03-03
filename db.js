@@ -1,22 +1,16 @@
-const mongoose = require ("mongoose");
+const mongoose = require("mongoose");
 
 
-const mongoURL ='mongodb://localhost:27017/resturantWeb2'
+const connectDB = async () =>{
+    try {
+        await mongoose.connect(process.env.DB_URL)
+        console.log('Mongodb connected successfully')
+    } catch (error) {
+        console.log("Mongidb connection failed",error.message);
+        process.exit(1);
+        
+    }
+}
 
+module.exports = connectDB;
 
-mongoose.connect(mongoURL)
-
-const db = mongoose.connection;
-
-
-db.on('connected', ()=>{
-    console.log('Connected to database Successfully');
-});
-db.on('error', (err)=>{
-    console.log('Connected to database some error:',err);
-});
-db.on('disconnected', ()=>{
-    console.log(' db is disconnected');
-});
-
-module.exports = db;

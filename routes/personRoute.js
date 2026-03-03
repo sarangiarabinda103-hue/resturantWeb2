@@ -16,6 +16,7 @@ router.post('/',async (req, res) => {
 
 
     } catch (error) {
+        console.log('Error details:', error)
         res.status(500).json({error:'Internal Server Error'})
        
     }
